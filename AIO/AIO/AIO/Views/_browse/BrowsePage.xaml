@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AIO.Views._browse.BrowsePage" NavigationPage.HasNavigationBar="False"
+             Title="Start">
+
+    <Shell.TitleView>
+
+         
+            
+            <StackLayout Orientation="Horizontal"> 
+                <ImageButton x:Name="_back" Source="https://www.searchpng.com/wp-content/uploads/2019/02/Back-Arrow-Icon-PNG-715x715.png" 
+                                HorizontalOptions="Start"     BackgroundColor="Transparent"
+                       Aspect="AspectFit"  HeightRequest="30"  Clicked="Back_Clicked"
+                       WidthRequest="40" />
+
+                <SearchBar Placeholder="Search..." TextChanged="SearchBar_TextChanged" HorizontalOptions="Center" SearchButtonPressed="Go_Clicked"></SearchBar>
+
+            </StackLayout>
+
+
+
+    </Shell.TitleView>
+
+    <StackLayout>
+       
+        <Label x:Name="LoadingLable" IsVisible="false" />
+        <WebView x:Name="Browser" HeightRequest="1000" WidthRequest="1000" Navigating="Browser_Navigating" Navigated="Browser_Navigated_1" />
+
+    </StackLayout>
+</ContentPage>

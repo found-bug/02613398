@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AIO.Views.NetworkNotConnectedPage"
+             Title="No Internet Found" BackgroundColor="#fff">
+    <ContentPage.Content>
+        <StackLayout>
+            <!--<Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />-->
+            <Grid Margin="0,150,0,0" >
+                <Grid.RowDefinitions>
+                <RowDefinition Height="220" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Connect Internet" FontSize="Title" HorizontalOptions="Center" TextColor="#000" />
+
+                <Image IsAnimationPlaying="True" Source="_no_internet.gif" Margin="0,0,0,0" IsVisible="true" Grid.Row="0" HorizontalOptions="CenterAndExpand" />
+
+
+
+                <Frame BackgroundColor="Transparent" CornerRadius="25" Grid.Row="1" Margin="50,0,50,0" Padding="0" WidthRequest="50">
+                    <Button x:Name="try_again" Text="Try Again" TextColor="#fff" Clicked="try_again_Clicked"  />
+                </Frame>
+
+            </Grid>
+
+            
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

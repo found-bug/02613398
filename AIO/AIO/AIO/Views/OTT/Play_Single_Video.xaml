@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms" NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False" FlyoutItem.IsVisible="False" Shell.TabBarIsVisible="False" 
+             x:Class="AIO.Views.OTT.Play_Single_Video">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <!--<forms1:VideoView x:Name="video_player" HorizontalOptions="FillAndExpand"
+                 HeightRequest="200" IsVisible="false"/>-->
+
+
+            <vlc:MediaPlayerElement x:Name="video_player" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                  />
+
+
+
+            <!-- This below code is setting up video screen at the right side bottom same as youtube small screen-->
+            <!--<vlc:MediaPlayerElement x:Name="video_player"  VerticalOptions="EndAndExpand"  HorizontalOptions="End"  
+            WidthRequest="150" RotationX="90" Margin="0,0,30,0" AnchorX=".1"
+                 HeightRequest="150" />-->
+ 
+
+
+ 
+
+           
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

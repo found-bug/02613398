@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:AIO.Controls"
+             x:Class="AIO.Views.Ad.Services_Category_Listing_Page">
+    <StackLayout>
+
+
+        <Frame BackgroundColor="#d8203a" Padding="24" CornerRadius="0">
+            <Label Text="Post Your Property" HorizontalTextAlignment="Center" TextColor="#fff" FontSize="20" />
+        </Frame>
+
+
+        <ScrollView>
+
+            <StackLayout Padding="30,10,30,0">
+
+                <!-- First StackLayout -->
+                <StackLayout x:Name="common_stack">
+
+                    <!-- First Row Electronics Category Picker -->
+                    <Frame x:Name="services_Category_picker_frame" CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="25" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_services_Category_picker" Text="Selected Services Type" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="services_Category_picker" HeightRequest="20" Title="Choose Services Type" Margin="5,-10,0,-15"
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="services_Category_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="services_Category_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="services_Category_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                </StackLayout>
+
+
+                <!-- Upload Images and Submit Page  -->
+                <StackLayout x:Name="upload_img_stack" IsVisible="false">
+
+                    <!-- Fifth Row Title -->
+                    <StackLayout>
+                        <Label x:Name="lbl_title" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Ad Title*" x:Name="ad_title"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Plain" MaxLength="70" TextChanged="ad_title_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Sixth Row Ad Discription -->
+                    <StackLayout>
+                        <Label x:Name="lbl_Description_txt" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame x:Name="description_frame" CornerRadius="10" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+
+                                <Editor x:Name="Description_editor" Keyboard="Plain" AutoSize="TextChanges" 
+                                            TextChanged="Description_editor_TextChanged" PlaceholderColor="Gray" Placeholder="Ad Description what you're selling*"
+                                        TextColor="#000" MaxLength="4096" FontSize="15" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="Include condition, features and reason for selling" FontSize="10"
+                           TextColor="#d8203a" Margin="5,-10,0,0"></Label>
+                    </StackLayout>
+
+                    <!-- Seventh Row Property Price -->
+                    <StackLayout>
+                        <Label x:Name="lbl_selling_price" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame x:Name="price_frame" CornerRadius="10" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Selling Price*" x:Name="selling_price"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="9" TextChanged="selling_price_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="There is no commition charges from our side" FontSize="10"
+                           TextColor="#d8203a" Margin="5,-10,0,0"></Label>
+                    </StackLayout>
+
+
+
+                    <!-- Eighth Row Upload Product Images -->
+                    <StackLayout x:Name="btn_stacklayout_property_img_upload" Margin="0,20,0,0">
+                        <Label x:Name="lbl_property_pick_images" Text="Upload Images" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <StackLayout>
+                            <Button Text="Pick images" Clicked="OnPickImagesClick" ImageSource="_icon_image_gallery.png" BackgroundColor="#d8203a" 
+                                    CornerRadius="10"/>
+                        </StackLayout>
+                        <Label Text="Upload upto 15 images of your product." FontSize="10"
+                           TextColor="#d8203a" Margin="10,-5,0,0"></Label>
+                    </StackLayout>
+
+
+                    <!-- Uploaded Image Show-->
+                    <StackLayout x:Name="img_list_stack" Orientation="Horizontal" IsVisible="false">
+
+                        <!--<Label Text="Selected Images" HorizontalOptions="CenterAndExpand" TextColor="#d8203a" Margin="5,10,0,0" />-->
+
+                        <StackLayout Margin="0,5,0,0" >
+
+                            <!--Second Category Icons Grid Start-->
+                            <CollectionView  x:Name="img_list" HeightRequest="170" HorizontalOptions="StartAndExpand">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <Grid Padding="1,0,1,0" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="150" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="150" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <ImageButton x:Name="Add_New_Post"
+                       Source="{Binding ImageUrl}" BackgroundColor="Transparent"
+                       Aspect="AspectFill" />
+
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <!--Second Category Grid Ends-->
+                        </StackLayout>
+                    </StackLayout>
+
+
+                    <!-- Submit Ad Button -->
+                    <StackLayout x:Name="post_ad_stack">
+
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="25,10,25,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" 
+                           Margin="0,0,0,5" >
+                            <StackLayout>
+                                <Button x:Name="submit_ad" BackgroundColor="Transparent" TextColor="#d8203a" Text="Post Your Ad" Margin="0,-10,0,0"
+                                    Clicked="submit_ad_Clicked"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                </StackLayout>
+
+
+
+
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+</ContentPage>

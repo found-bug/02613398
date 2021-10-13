@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="News"
+             x:Class="AIO.Views.News.SingleNewsPage">
+    <ContentPage.Content>
+        <StackLayout>
+
+           
+            
+
+       
+
+                <CollectionView x:Name="_news_list" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="220" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Frame BackgroundColor="White" Grid.ColumnSpan="2" CornerRadius="5" Padding="10">
+                                    <ImageButton x:Name="news_img"   BackgroundColor="Transparent"
+                       Source="{Binding image}"
+                       Aspect="AspectFill" HorizontalOptions="FillAndExpand"    />
+                                </Frame>
+
+                            <ScrollView Grid.Row="1">
+
+                                <StackLayout>
+                                    <Label  Grid.Row="1" Grid.ColumnSpan="2" Padding="10,0" 
+                       Text="{Binding title}"     TextColor="#000"
+                       FontAttributes="Bold" />
+
+                                    <Label    
+                       Grid.Row="2"  TextColor="#000" FontSize="10" Padding="10,0" HorizontalOptions="End" 
+                       Text="{Binding datePublished}" />
+
+                                    <Label Grid.Row="3" Padding="10,0" 
+                       Text="{Binding description}"     TextColor="#000" FontSize="14" />
+                                </StackLayout>
+
+                            </ScrollView>
+
+
+                        </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

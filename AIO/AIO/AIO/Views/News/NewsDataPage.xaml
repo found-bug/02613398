@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="News"
+             x:Class="AIO.Views.News.NewsDataPage">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label Text="Loading..." x:Name="loading_label" FontSize="Title" HorizontalOptions="Center" Margin="0,40,0,0" TextColor="#000"/>
+            <Image x:Name="loading" Source="_loading.gif" IsAnimationPlaying="True" VerticalOptions="Start" Margin="0,40,0,0"
+                   HorizontalOptions="Center" Aspect="AspectFit" />
+
+
+            <ScrollView>
+                <StackLayout>
+
+                  
+
+                    <!--Cart Listing Start-->
+                    <StackLayout x:Name="_cart_products">
+                        <!--Products List-->
+                        <!-- Use your own layout and functionality here! -->
+                        <CollectionView x:Name="_news_list" >
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="10" >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="150" />
+                                            <RowDefinition Height="40" />
+                                            <RowDefinition Height="40" />
+                                            <RowDefinition Height="40" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Frame BackgroundColor="White" Grid.RowSpan="2" Grid.ColumnSpan="2" CornerRadius="5" Padding="10">
+                                            <ImageButton x:Name="news_img"   BackgroundColor="Transparent"
+                       Source="{Binding thumbnail}" Clicked="news_img_Clicked" CommandParameter="{Binding id}"
+                       Aspect="AspectFill" HorizontalOptions="FillAndExpand"    />
+                                        </Frame>
+                                        <Label Grid.Row="2"    MaxLines="1" Padding="10,0" 
+                       Text="{Binding title}"     TextColor="#000"
+                       FontAttributes="Bold" />
+
+
+                                        <Label Grid.Row="3"    MaxLines="2" Padding="10,0" Margin="0,-20,0,0"
+                       Text="{Binding description}"     TextColor="#000" FontSize="12" />
+
+
+                                        <!--Row for product Cost and Quantity-->
+                                        <Grid Grid.Row="3" Margin="0,20,0,0" Padding="10,0" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="40" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--  Row 1 -->
+
+
+                                            <Label    
+                       HorizontalOptions="Start"   TextColor="#000" FontSize="10" 
+                       Text="{Binding datePublished}" />
+
+
+                                            <!--  Column 2 -->
+
+
+                                            <Label Grid.Column="1"     FontSize="10" 
+                       HorizontalOptions="End"     TextColor="#000"
+                       Text="{Binding language}" />
+                                        </Grid>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+
+                            <Button BackgroundColor="Transparent" Text="Pervious" HorizontalOptions="Start" VerticalOptions="Start" TextColor="Blue" x:Name="btn_Pervious" Clicked="btn_Pervious_Clicked" IsEnabled="False" />
+                            <Button BackgroundColor="Transparent" Text="Next" HorizontalOptions="End" VerticalOptions="End" TextColor="Blue"  x:Name="btn_Next" Clicked="btn_Next_Clicked"/>
+                        </StackLayout>
+                        
+                    </StackLayout>
+
+
+
+                </StackLayout>
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

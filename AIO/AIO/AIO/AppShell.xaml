@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:local="clr-namespace:AIO.Views.general_forms" 
+       xmlns:local1="clr-namespace:AIO.Views" 
+       xmlns:local2="clr-namespace:AIO.Views._browse" 
+       xmlns:local3="clr-namespace:AIO.Views.OTT" 
+       Title="AIO"
+       x:Class="AIO.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="NavigationPrimary">#FEFEFE</Color>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="#d8203a" />
+                <!--<Setter Property="Shell.BackgroundColor" Value="#244b90" />-->
+                <Setter Property="Shell.ForegroundColor" Value="#fff" />
+                <Setter Property="Shell.TitleColor" Value="#fff" />
+                <Setter Property="Shell.UnselectedColor" Value="LightGray" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="#ED6237" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#000" />
+                <Setter Property="Shell.TabBarTitleColor" Value="#ED6237" />
+            </Style>
+            <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.FlyoutHeader>
+        <local1:FlyoutHeader />
+    </Shell.FlyoutHeader>
+
+
+    <MenuItem Text="Account" Clicked="Login_Clicked" IconImageSource="_login_btn2.png" />
+
+
+    <FlyoutItem FlyoutItemIsVisible="False" x:Name="_tab_list">
+        <Tab Icon="_icon_home.png" Title="Home">
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+        </Tab>
+        <Tab Icon="_icon_ads.png" Title="Advertisement">
+            <ShellContent Title="My Ads" ContentTemplate="{DataTemplate local1:AboutPage}" />
+            <ShellContent Title="Chats" ContentTemplate="{DataTemplate local1:AboutPage}" />
+            <ShellContent Title="Favourites" ContentTemplate="{DataTemplate local1:AboutPage}" />
+        </Tab>
+        <Tab  Title="OTT" >
+
+        </Tab>
+
+
+        <Tab Icon="_icon_ott.png" Title="OTT">
+            <ShellContent ContentTemplate="{DataTemplate local3:OTTPage}" />
+        </Tab>
+
+        <!--<Tab Icon="_live_tv.png" Title="Live TV">
+            <ShellContent ContentTemplate="{DataTemplate local1:AboutPage}" />
+        </Tab>-->
+
+        <Tab Icon="_icon_live_tv.png" Title="Live TV">
+            <ShellContent ContentTemplate="{DataTemplate local1:AboutPage}" />
+        </Tab>
+    </FlyoutItem>
+
+</Shell>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AIO.Views.general_forms.SplashPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+   ios:Page.PrefersStatusBarHidden="True"
+   ios:Page.PreferredStatusBarUpdateAnimation="Fade"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#d8203a">
+    
+    <ContentPage.Content>
+
+        <Grid
+            Margin="0"
+            Padding="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+
+            <Label
+                Text="Aazmao" FontSize="60" Grid.Row="0" Grid.Column="0" Margin="-20,0,0,0"
+                x:Name="welcomeNote0"  FontAttributes="Bold"  TextColor="#fff"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand" />
+
+
+
+            <!--<Label
+                Text="Local" FontSize="25" Grid.Row="0" Grid.Column="0" Margin="215,25,0,0"
+                x:Name="welcomeNote1"  TextColor="#fff"
+                HorizontalOptions="Start"
+                VerticalOptions="CenterAndExpand" />-->
+
+
+            <Label
+                Text="Watch Read &amp; Earn" FontSize="15" Grid.Row="0" Grid.Column="0" Margin="0,80,0,0"
+                x:Name="welcomeNote2"  TextColor="#fff"
+                 HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand" />
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:AIO.Controls"
+             x:Class="AIO.Views.Ad.Property_Category_Listing_Page">
+    <StackLayout>
+        
+        <Frame BackgroundColor="#d8203a" Padding="24" CornerRadius="0">
+            <Label Text="Post Your Property" HorizontalTextAlignment="Center" TextColor="#fff" FontSize="20" />
+        </Frame>
+
+
+        <ScrollView>
+
+            <StackLayout Padding="30,10,30,0">
+
+                <!-- First StackLayout -->
+                <StackLayout x:Name="common_stack">
+
+                    <!-- FirstRow Property Category Picker -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="25" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_property_category_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="property_category_picker" HeightRequest="20" Title="Choose Category" Margin="5,-10,0,-15"
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="property_category_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="property_category_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="property_category_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Second Row Property is for sale or on rent -->
+                    <StackLayout x:Name="btn_stacklayout_sale_rent" IsVisible="false">
+                        <!-- On button click value will be change of transmission_selected_val label from null to Manual or Automatic transmission-->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Property is on*" TextColor="#d8203a" HorizontalOptions="Start" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0"></Label>
+                            <Label x:Name="lbl_property_is_on" TextColor="#000" Grid.Row="0" Grid.Column="1" WidthRequest="100" Margin="-35,0,0,0"></Label>
+                        </Grid>
+
+                        <!-- Property is on sale or on rent Buttons -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Frame x:Name="sale_btn_stacklayout" CornerRadius="10" HeightRequest="40" Padding="5,5" BorderColor="#d8203a" BackgroundColor="Transparent"
+                                Margin="0,0,0,5" HorizontalOptions="Start"  WidthRequest="150" >
+                                <Button x:Name="property_sale_btn" Text="Sale" BackgroundColor="Transparent" WidthRequest="120" Padding="2,2"
+                                TextColor="Black" Margin="0,0,0,5" Clicked="property_sale_btn_Clicked" />
+                            </Frame>
+
+                            <Frame x:Name="rent_btn_stacklayout" CornerRadius="10" HeightRequest="40" Padding="5,5" BorderColor="#d8203a" BackgroundColor="Transparent" WidthRequest="150"
+                              Grid.Column="1"   Margin="10,0,0,5" HorizontalOptions="EndAndExpand" >
+                                <Button x:Name="property_rent_btn" Text="Rent"  BackgroundColor="Transparent" WidthRequest="120" Padding="2,2"
+                                 Margin="0,0,0,5"   TextColor="Black" Clicked="property_rent_btn_Clicked"  />
+                            </Frame>
+                        </Grid>
+                    </StackLayout>
+
+
+                    <!-- Third Row property listed by Picker -->
+                    <Frame x:Name="frame_property_listed_by_picker" IsVisible="false" CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_property_listed_by_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="property_listed_by_picker"  HeightRequest="20" Title="Ad posted by" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="property_listed_by_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="property_listed_by_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="property_listed_by_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+
+                    <!-- Forth Row Property Site Facing Picker -->
+                    <Frame x:Name="frame_property_direction_picker" IsVisible="false" CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_property_direction_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="property_direction_picker"  HeightRequest="20" Title="Your Property Direction is" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="property_direction_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="property_direction_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="property_direction_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+
+
+                </StackLayout>
+
+
+                <!-- 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
+
+
+                <!-- Second StackLayout -->
+                <StackLayout x:Name="House_and_Appartment_stacklayout" IsVisible="false">
+
+                    <!-- Fifth Row Property Type Picker -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_property_type_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="property_type_picker"  HeightRequest="20" Title="Which property type do you've" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="property_type_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="property_type_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="property_type_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Sixth Row Bedroom Picker -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_property_bedroom_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="property_bedroom_picker"  HeightRequest="20" Title="How many bedrooms are there" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="property_bedroom_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="property_bedroom_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="property_bedroom_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Seventh Row bathroom Picker -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_property_bathroom_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="property_bathroom_picker"  HeightRequest="20" Title="How many bathrooms are there" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="property_bathroom_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="property_bathroom_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="property_bathroom_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Eighth Row  Furnished or not Picker -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_property_Furnished_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="property_Furnished_picker"  HeightRequest="20" Title="Furnished or Unfurnished" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="property_Furnished_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="property_Furnished_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="property_Furnished_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Ninth Row how old property construction picker -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_property_construction_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="property_construction_picker"  HeightRequest="20" Title="How old construction is" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="property_construction_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="property_construction_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="property_construction_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Tenth Row Buildup Area -->
+                    <StackLayout>
+                        <Label x:Name="lbl_buildup_area" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Super Builtup Area (ft²)*" x:Name="buildup_area"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="7" TextChanged="buildup_area_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Eleventh Row Carpet Area -->
+                    <StackLayout>
+                        <Label x:Name="lbl_carpet_area" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Carpet Area (ft²)*" x:Name="carpet_area"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="7" TextChanged="carpet_area_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Twelth Row Maintenance Cost -->
+                    <StackLayout>
+                        <Label x:Name="lbl_Maintenance_cost" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Maintenance Cost (Monthly)" x:Name="Maintenance_Cost"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="7" TextChanged="Maintenance_Cost_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Thirteen Row Total Floors -->
+                    <StackLayout>
+                        <Label x:Name="lbl_total_floors" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Total Floors" x:Name="total_floors"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="3" TextChanged="total_floors_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Forteenth Row Car Parking Picker -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_car_parking_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="car_parking_picker"  HeightRequest="20" Title="How Many Car Parking You've" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="car_parking_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="car_parking_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="car_parking_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+ 
+
+                    <!-- Fifteen Row Project Name -->
+                    <StackLayout>
+                        <Label x:Name="lbl_project_name" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Project Name" x:Name="project_name"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Plain" MaxLength="30" TextChanged="project_name_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+ 
+
+                </StackLayout>
+
+
+                <!-- 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
+                
+                
+                <!-- Third StackLayout -->
+                <StackLayout x:Name="Lands_and_Plots_stacklayout" IsVisible="false">
+
+                    <!-- Fifth Row Plot Area -->
+                    <StackLayout>
+                        <Label x:Name="lbl_plot_area" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Plot Area*" x:Name="plot_area"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="7" TextChanged="plot_area_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+
+                    <!-- Sixth Row Length -->
+                    <StackLayout>
+                        <Label x:Name="lbl_Length" Text="Length (Heigth)" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Length (Heigth)" x:Name="plot_length"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="7" TextChanged="plot_length_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Sixth Row Breadth -->
+                    <StackLayout>
+                        <Label x:Name="lbl_Breadth" Text="Breadth (Width)" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Breadth (Width)" x:Name="plot_breadth"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="7" TextChanged="plot_breadth_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Seventh Row Project Name Plot -->
+                    <StackLayout>
+                        <Label x:Name="lbl_plot_project_name" Text="Project Name" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Project Name" x:Name="plot_project_name"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Plain" MaxLength="30" TextChanged="plot_project_name_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+
+                </StackLayout>
+                
+
+                <!-- 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
+                                
+
+                <!-- Forth StackLayout -->
+                <StackLayout x:Name="Shops_and_Offices_stacklayout" IsVisible="false">
+
+
+                    <!-- Fifth Row Shop Area -->
+                    <StackLayout>
+                        <Label x:Name="lbl_Shop_area" Text="Your shop area is" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Shop Area*" x:Name="Shop_area"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="7" TextChanged="Shop_area_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+
+                    <!-- Sixth Row Shop Length -->
+                    <StackLayout>
+                        <Label x:Name="lbl_Shop_Length" Text="Shop Length (Heigth)" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Shop Length (Heigth)" x:Name="Shop_length"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="7" TextChanged="Shop_length_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Sixth Row Shop Breadth -->
+                    <StackLayout>
+                        <Label x:Name="lbl_Shop_Breadth" Text="Shop Breadth (Width)" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Shop Breadth (Width)" x:Name="Shop_breadth"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="7" TextChanged="Shop_breadth_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Seventh Row Project Name Shop -->
+                    <StackLayout>
+                        <Label x:Name="lbl_Shop_project_name" Text="Project Name" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Project Name" x:Name="Shop_project_name"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Plain" MaxLength="30" TextChanged="Shop_project_name_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                </StackLayout>
+
+
+                <!-- 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
+                                
+
+                <!-- Fifth StackLayout -->
+                <StackLayout x:Name="Guesthouse_and_PG_stacklayout" IsVisible="false">
+
+                    <!-- Fifth Row Building Sub Type Picker -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_Building_Sub_Type_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="pg_Building_Sub_Type_picker"  HeightRequest="20" Title="Your building sub type is" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="pg_Building_Sub_Type_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="pg_Building_Sub_Type_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="pg_Building_Sub_Type_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+
+                    <!-- Sixth Row Car Parking Picker -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_pg_car_parking_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="pg_car_parking_picker"  HeightRequest="20" Title="How Many Car Parking You've" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="pg_car_parking_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="pg_car_parking_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="pg_car_parking_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+
+                    <!-- Seventh Row Meals included or not rent -->
+                    <StackLayout>
+                        <!-- On button click value will be change of transmission_selected_val label from null to Manual or Automatic transmission-->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Meals Included*" TextColor="#d8203a" HorizontalOptions="Start" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0"></Label>
+                            <Label x:Name="lbl_meals_included" TextColor="#000" Grid.Row="0" Grid.Column="1" WidthRequest="100" Margin="-35,0,0,0"></Label>
+                        </Grid>
+
+                        <!-- Property is on sale or on rent Buttons -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Frame x:Name="yes_btn_meals_included_stacklayout" CornerRadius="10" HeightRequest="40" Padding="5,5" BorderColor="#d8203a" BackgroundColor="Transparent"
+                                Margin="0,0,0,5" HorizontalOptions="Start"  WidthRequest="150" >
+                                <Button x:Name="yes_meals_included_btn" Text="Yes" BackgroundColor="Transparent" WidthRequest="120" Padding="2,2"
+                                TextColor="Black" Margin="0,0,0,5" Clicked="yes_meals_included_btn_Clicked" />
+                            </Frame>
+
+                            <Frame x:Name="no_btn_meals_included_stacklayout" CornerRadius="10" HeightRequest="40" Padding="5,5" BorderColor="#d8203a" BackgroundColor="Transparent" WidthRequest="150"
+                              Grid.Column="1"   Margin="10,0,0,5" HorizontalOptions="EndAndExpand" >
+                                <Button x:Name="no_meals_included_btn" Text="No"  BackgroundColor="Transparent" WidthRequest="120" Padding="2,2"
+                                 Margin="0,0,0,5"   TextColor="Black" Clicked="no_meals_included_btn_Clicked"  />
+                            </Frame>
+                        </Grid>
+                    </StackLayout>
+
+
+
+                </StackLayout>
+
+            
+            <!-- 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
+
+
+                <Button x:Name="first_block_next_btn" Text="Next" CornerRadius="10" Clicked="first_block_next_btn_Clicked"
+                              Margin="30,20" />
+
+
+
+                <!-- 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 -->
+            
+                <!-- Upload Images and Submit Page  -->
+                <StackLayout x:Name="upload_img_stack" IsVisible="false">
+
+                    <!-- Sixteenth Row Title -->
+                    <StackLayout>
+                        <Label x:Name="lbl_title" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Ad Title*" x:Name="building_floor_ad_title"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Plain" MaxLength="70" TextChanged="building_floor_ad_title_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Seventeenth Row Ad Discription -->
+                    <StackLayout>
+                        <Label x:Name="lbl_building_floor_Description_txt" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame x:Name="description_frame" CornerRadius="10" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                
+                                <Editor x:Name="building_floor_Description_editor" Keyboard="Plain" AutoSize="TextChanges" 
+                                            TextChanged="building_floor_Description_editor_TextChanged" PlaceholderColor="Gray" Placeholder="Ad Description what you're selling*"
+                                        TextColor="#000" MaxLength="4096" FontSize="15" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="Include condition, features and reason for selling" FontSize="10"
+                           TextColor="#d8203a" Margin="5,-10,0,0"></Label>
+                    </StackLayout>
+
+                    <!-- Eighteenth Row Property Price -->
+                    <StackLayout>
+                        <Label x:Name="lbl_price_property" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame x:Name="price_frame" CornerRadius="10" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Selling Price*" x:Name="price_property"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="9" TextChanged="price_property_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="There is no commition charges from our side" FontSize="10"
+                           TextColor="#d8203a" Margin="5,-10,0,0"></Label>
+                    </StackLayout>
+
+
+
+                    <!-- Ninteenth Row Upload Product Images -->
+                    <StackLayout x:Name="btn_stacklayout_property_img_upload" Margin="0,20,0,0">
+                        <Label x:Name="lbl_property_pick_images" Text="Upload Images" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <StackLayout>
+                            <Button Text="Pick images" Clicked="OnPickImagesClick" ImageSource="_icon_image_gallery.png" BackgroundColor="#d8203a" 
+                                    CornerRadius="10"/>
+                        </StackLayout>
+                        <Label Text="Upload upto 15 images of your product." FontSize="10"
+                           TextColor="#d8203a" Margin="10,-5,0,0"></Label>
+                    </StackLayout>
+
+
+                    <!-- Uploaded Image Show-->
+                    <StackLayout x:Name="img_list_stack" Orientation="Horizontal" IsVisible="false">
+
+                        <!--<Label Text="Selected Images" HorizontalOptions="CenterAndExpand" TextColor="#d8203a" Margin="5,10,0,0" />-->
+
+                        <StackLayout Margin="0,5,0,0" >
+
+                            <!--Second Category Icons Grid Start-->
+                            <CollectionView  x:Name="img_list" HeightRequest="170" HorizontalOptions="StartAndExpand">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <Grid Padding="1,0,1,0" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="150" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="150" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <ImageButton x:Name="Add_New_Post"
+                       Source="{Binding ImageUrl}" BackgroundColor="Transparent"
+                       Aspect="AspectFill" />
+
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <!--Second Category Grid Ends-->
+                        </StackLayout>
+                    </StackLayout>
+
+                </StackLayout>
+
+
+                <!-- Submit Ad Button -->
+                <StackLayout x:Name="post_ad_stack" IsVisible="false">
+
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="25,10,25,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" 
+                           Margin="0,0,0,5" >
+                        <StackLayout>
+                            <Button x:Name="submit_ad" BackgroundColor="Transparent" TextColor="#d8203a" Text="Post Your Ad" Margin="0,-10,0,0"
+                                    Clicked="submit_ad_Clicked"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+
+
+            </StackLayout>
+
+        </ScrollView>
+
+    </StackLayout>
+</ContentPage>

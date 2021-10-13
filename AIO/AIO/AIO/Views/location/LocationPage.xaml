@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             Title="Find Your Location"             
+             x:Class="AIO.Views.location.LocationPage">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="Transparent">
+            
+            <!--<SearchBar x:Name="search_location" TextChanged="search_location_TextChanged" TextColor="Black"></SearchBar>
+            <ListView x:Name="list">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell x:Name="_location_record" Text="{Binding Latitude}" Detail="{Binding Longitude}"  TextColor="Black" CommandParameter="{Binding ProductName}" Tapped="_location_record_Tapped">
+
+                        </TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+
+            <Grid   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <maps:Map x:Name="map" Grid.RowSpan="2" Grid.ColumnSpan="2" MapClicked="map_MapClicked">
+                    <x:Arguments>
+                        <maps:MapSpan>
+                            <x:Arguments>
+                                <maps:Position>
+                                    <x:Arguments>
+                                        <x:Double>28.38</x:Double>
+                                        <x:Double>77.12</x:Double>
+                                    </x:Arguments>
+                                </maps:Position>
+                                <!--<x:Double>0.01</x:Double>
+                            <x:Double>0.01</x:Double>-->
+                                <x:Double>8</x:Double>
+                                <x:Double>8</x:Double>
+                            </x:Arguments>
+                        </maps:MapSpan>
+                    </x:Arguments>
+                    <maps:Map.Pins>
+                        <maps:Pin Label="Delhi"
+                          Address="Capital of India"
+                          Type="Place">
+                            <maps:Pin.Position>
+                                <maps:Position>
+                                    <x:Arguments>
+                                        <x:Double>28.613864</x:Double>
+                                        <x:Double>77.208916</x:Double>
+                                    </x:Arguments>
+                                </maps:Position>
+                            </maps:Pin.Position>
+                        </maps:Pin>
+                    </maps:Map.Pins>
+                </maps:Map>
+
+
+                <Grid Margin="10" Grid.Row="0" Grid.ColumnSpan="2" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="AUTO"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="AUTO"/>
+                    </Grid.ColumnDefinitions>
+
+
+
+                    <StackLayout  Orientation="Horizontal"  VerticalOptions="Center" Spacing="5">
+                        <Frame  CornerRadius="100" BackgroundColor="Transparent"
+                                                HeightRequest="60"
+                                                 WidthRequest="30"
+                                                 HorizontalOptions="Start"
+                                                 Padding="0"
+                                                 IsClippedToBounds="True">
+
+                            <ImageButton x:Name="location_icon" Source="_icon_current_location.png" BackgroundColor="Transparent"
+                       Aspect="AspectFit"   Padding="5,5,5,5"  HeightRequest="40"  Clicked="OnTapGestureRecognizerTapped"
+                       WidthRequest="30" />
+                        </Frame>
+
+                        <!--<Label Grid.Row="1"
+                       Text="Hotel" HorizontalOptions="Center" TextColor="#000" FontSize="Micro"
+                       FontAttributes="Bold" />-->
+
+                        <Label HorizontalOptions="Start" Margin="0,20">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Use current location"
+                  TextColor="Blue" FontSize="15" FontAttributes="None"
+                  TextDecorations="Underline">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped" />
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                </Grid>
+            </Grid>
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

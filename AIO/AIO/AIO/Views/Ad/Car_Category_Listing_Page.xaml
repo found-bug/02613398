@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AIO.ViewModels.ads"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:local="clr-namespace:AIO.Controls"
+             NavigationPage.HasNavigationBar="False"   
+             NavigationPage.HasBackButton="False" FlyoutItem.IsVisible="False" Shell.TabBarIsVisible="False" 
+             x:Class="AIO.Views.Ad.Car_Category_Listing_Page">
+
+
+    <!-- Datasource ViewModel-->
+    <!--<ContentPage.BindingContext>
+        <vm:CarCategoryListViewModel />
+    </ContentPage.BindingContext>-->
+
+    <StackLayout>
+
+        <Frame BackgroundColor="#d8203a" Padding="24" CornerRadius="0">
+            <Label Text="Share Your Car Details" HorizontalTextAlignment="Center" TextColor="#fff" FontSize="20" />
+        </Frame>
+        
+
+        <ScrollView>
+            <StackLayout Padding="30,10,30,0">
+              
+
+                <StackLayout x:Name="first_block">
+
+                    <!-- First Row Brand Name -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="1" Margin="0,5" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="25" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_brand_name_picker" TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"
+                               Grid.Row="0" Grid.ColumnSpan="2"></Label>
+
+                            <Picker x:Name="brand_name_picker"  HeightRequest="20" Title="Choose Your Car Type" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="brand_name_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="brand_name_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="brand_name_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Sencond Row Brand Varient -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="2" Margin="0,5" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="25" />
+                            </Grid.ColumnDefinitions>
+                            <Label x:Name="lbl_brand_varient_picker"  Grid.Row="0" Grid.ColumnSpan="2"
+                               TextColor="#d8203a" Margin="10,-10,0,-15" IsVisible="false"></Label>
+
+                            <Picker x:Name="brand_varient_picker"  HeightRequest="20" Title="Select Car Varient Model" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="brand_varient_picker_SelectedIndexChanged" />
+                            <ImageButton x:Name="brand_varient_picker_img_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="brand_varient_picker_img_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Third Row Fuel Type -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="3" Margin="0,5" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="25" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_fuel_tupe_list" TextColor="#d8203a" Grid.Row="0" Grid.ColumnSpan="2"
+                               Margin="10,-10,0,-15" IsVisible="false"></Label>
+
+                            <Picker x:Name="_fuel_tupe_list"  HeightRequest="20" Title="Select Car Fuel Type" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="_fuel_tupe_list_SelectedIndexChanged" />
+                            <ImageButton x:Name="_fuel_tupe_list_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="_fuel_tupe_list_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+
+                    <!-- Forth Row KM Driven -->
+                    <StackLayout>
+                        <Label x:Name="lbl_km_driven" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="KM Driven*" x:Name="km_driven"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="8" TextChanged="km_driven_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+
+                    <!-- Fifth Row Transmission Buttons -->
+                    <StackLayout>
+                        <!-- On button click value will be change of transmission_selected_val label from null to Manual or Automatic transmission-->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Transmission*" TextColor="#d8203a" HorizontalOptions="Start" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0"></Label>
+                            <Label x:Name="transmission_selected_val" TextColor="#000" Grid.Row="0" Grid.Column="1" WidthRequest="100" Margin="-35,0,0,0"></Label>
+                        </Grid>
+                        
+                        <!-- Transmission Buttons -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Frame CornerRadius="10" HeightRequest="40" Padding="5,5" BorderColor="#d8203a" BackgroundColor="Transparent"
+                                Margin="0,0,0,5" HorizontalOptions="Start"  WidthRequest="150" >
+                                <Button x:Name="car_type_automatic" Text="Automatic" BackgroundColor="Transparent" WidthRequest="120" Padding="2,2"
+                                TextColor="Black" Margin="0,0,0,5" Clicked="car_type_automatic_Clicked" />
+                            </Frame>
+
+                            <Frame CornerRadius="10" HeightRequest="40" Padding="5,5" BorderColor="#d8203a" BackgroundColor="Transparent" WidthRequest="150"
+                              Grid.Column="1"   Margin="10,0,0,5" HorizontalOptions="EndAndExpand" >
+                                <Button x:Name="car_type_manual" Text="Manual"  BackgroundColor="Transparent" WidthRequest="120" Padding="2,2"
+                                 Margin="0,0,0,5"   TextColor="Black" Clicked="car_type_manual_Clicked"  />
+                            </Frame>
+                        </Grid>
+                    </StackLayout>
+
+
+                    <!-- Sixth Row Transmission Buttons -->
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="3" Margin="0,5" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220" />
+                                <ColumnDefinition Width="25" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lbl_number_of_onwer" TextColor="#d8203a" Margin="10,-10,0,-15" Grid.Row="0" Grid.ColumnSpan="2" 
+                               IsVisible="false"></Label>
+
+                            <Picker x:Name="_number_of_onwer_list" HeightRequest="20" Title="No. of Onwer*" Margin="5,-10,0,-15" 
+                                FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" SelectedIndexChanged="_number_of_onwer_list_SelectedIndexChanged" />
+                            <ImageButton x:Name="_number_of_onwer_list_btn" Source="_icon_dropdown_arrow.png" Grid.Row="0" Grid.Column="2" BackgroundColor="Transparent" 
+                                WidthRequest="20"  Margin="0,0,5,0"   HorizontalOptions="End" Clicked="_number_of_onwer_list_btn_Clicked" />
+                        </Grid>
+                    </Frame>
+
+                    
+                    <Button x:Name="first_block_next_btn" Text="Next" CornerRadius="10" Clicked="first_block_next_btn_Clicked" Margin="30,20" />
+                </StackLayout>
+
+
+                <!-- Second Block will appear after click on next button of First Block-->
+                <StackLayout x:Name="second_block" IsVisible="false">
+
+                    <!-- Seventh Row Ad Title -->
+                    <StackLayout>
+                        <Label x:Name="lbl_ad_title" Text="Your Ad title is" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame CornerRadius="10" HeightRequest="35" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Ad Title*" x:Name="ad_title"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Plain" MaxLength="70"  TextChanged="ad_title_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="Mention the key features of your car like brand, model, purchase year, transmission etc" FontSize="10"
+                           TextColor="#d8203a" Margin="5,-10,0,0"></Label>
+                    </StackLayout>
+
+
+                    <!-- Eighth Row Ad Discription -->
+                    <StackLayout>
+                        <Label x:Name="lblDescription_txt" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame x:Name="description_frame" CornerRadius="10" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <!--<local:CustomEntry Placeholder="Describe what you are selling*" x:Name="Description_txt"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Plain" MaxLength="4096" TextChanged="Description_txt_TextChanged" />-->
+
+
+                                <Editor x:Name="description_editor" Keyboard="Plain" AutoSize="TextChanges" 
+                                        TextChanged="description_editor_TextChanged" Placeholder="Description what you're selling and why*"
+                                        TextColor="#000" MaxLength="4096" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="Include condition, features and reason for selling" FontSize="10"
+                           TextColor="#d8203a" Margin="5,-10,0,0"></Label>
+                    </StackLayout>
+
+
+                    <!-- Ninth Row Car Price -->
+                    <StackLayout>
+                        <Label x:Name="lbl_price" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <Frame x:Name="price_frame" CornerRadius="10" Padding="5,10,5,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" Margin="0,0,0,5" >
+                            <StackLayout>
+                                <local:CustomEntry Placeholder="Selling Price*" x:Name="price_txt"  PlaceholderColor="Gray"  TextColor="#000" Margin="5,-5,0,0" 
+                              BackgroundColor="White" HeightRequest="40" FontSize="15" Keyboard="Numeric" MaxLength="9" TextChanged="price_txt_TextChanged" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="There is no commition charges from our side" FontSize="10"
+                           TextColor="#d8203a" Margin="5,-10,0,0"></Label>
+                    </StackLayout>
+
+
+
+                    <!-- First Row of Second Block Upload Product Images -->
+                    <StackLayout x:Name="btn_stacklayout" Margin="0,20,0,0">
+                        <Label x:Name="lbl_pick_images" Text="Upload Images" TextColor="#d8203a" IsVisible="false" Margin="0,0,0,0"></Label>
+                        <StackLayout>
+                            <Button Text="Pick images" Clicked="OnPickImagesClick" ImageSource="_icon_image_gallery.png" BackgroundColor="#d8203a" 
+                                    CornerRadius="10"/>
+                        </StackLayout>
+                        <Label Text="Upload upto 15 images of your product." FontSize="10"
+                           TextColor="#d8203a" Margin="10,-5,0,0"></Label>
+                    </StackLayout>
+                    
+                    
+                    <!-- Uploaded Image Show-->
+                    <StackLayout x:Name="img_list_stack" Orientation="Horizontal" IsVisible="false">
+
+                        <!--<Label Text="Selected Images" HorizontalOptions="CenterAndExpand" TextColor="#d8203a" Margin="5,10,0,0" />-->
+
+                        <StackLayout Margin="0,5,0,0" >
+
+                            <!--Second Category Icons Grid Start-->
+                            <CollectionView  x:Name="img_list" HeightRequest="170" HorizontalOptions="StartAndExpand">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <Grid Padding="1,0,1,0" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="150" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="150" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <ImageButton x:Name="Add_New_Post"
+                       Source="{Binding ImageUrl}" BackgroundColor="Transparent"
+                       Aspect="AspectFill" />
+
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <!--Second Category Grid Ends-->
+                        </StackLayout>
+                    </StackLayout>                
+                
+                </StackLayout>
+
+                <!-- Submit Ad Button -->
+                <StackLayout x:Name="post_ad_stack" IsVisible="false">
+                    
+                    <Frame CornerRadius="10" HeightRequest="35" Padding="25,10,25,5" BorderColor="#d8203a" BackgroundColor="Transparent" Grid.Row="4" 
+                           Margin="0,0,0,5" >
+                        <StackLayout>
+                            <Button x:Name="submit_ad" BackgroundColor="Transparent" TextColor="#d8203a" Text="Post Your Ad" Margin="0,-10,0,0"
+                                    Clicked="submit_ad_Clicked"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+        <!--<StackLayout Margin="20,20">
+           
+            <Button x:Name="pickVideos" Text="Pick Videos" Clicked="pickVideos_Clicked" />
+        </StackLayout>-->
+        
+    </StackLayout>
+    
+</ContentPage>
